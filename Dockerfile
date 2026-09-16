@@ -33,11 +33,16 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
     conda config --set auto_update_conda False && \
     conda clean --all --yes
 
+# Accept Anaconda Terms of Service
+RUN conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main && \
+    conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+
 # Copy files and create conda environment
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 ADD backend/environment.yml ./
+
 RUN conda env create -f environment.yml && \
     conda clean --all --yes
 
