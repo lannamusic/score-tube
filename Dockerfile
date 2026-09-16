@@ -1,4 +1,3 @@
-```dockerfile
 FROM ubuntu:22.04
 
 SHELL ["/bin/bash", "-c"]
@@ -49,4 +48,3 @@ ADD backend /usr/src/app/
 EXPOSE 10000
 
 CMD ["source /opt/conda/etc/profile.d/conda.sh && conda activate score-tube && exec gunicorn --bind=0.0.0.0:${PORT:-10000} --workers=2 --timeout 180 server:__hug_wsgi__"]
-```
